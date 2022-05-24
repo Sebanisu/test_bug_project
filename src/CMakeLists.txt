@@ -1,6 +1,4 @@
-add_subdirectory(sdl)
-add_subdirectory(fltk)
-
+add_subdirectory(unit_test)
 find_package(fmt CONFIG)
 find_package(spdlog CONFIG)
 find_package(CLI11 CONFIG REQUIRED)
