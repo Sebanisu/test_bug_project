@@ -12,3 +12,6 @@ cmake_find_package_multi
 cmake
 cmake_find_package
 gcc
+
+[options]
+boost-ext-ut:disable_module=True
