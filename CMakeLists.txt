@@ -14,7 +14,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 # is enabled and all warnings are treated as errors
 # if you want to switch this behavior, change TRUE to FALSE
 set(ENABLE_DEVELOPER_MODE
-    TRUE
+    FALSE
     CACHE BOOL "Enable 'developer mode'")
 
 # Change this to false if you want to disable warnings_as_errors in developer mode
@@ -93,6 +93,13 @@ include(${_project_options_SOURCE_DIR}/src/DynamicProjectOptions.cmake)
 # set(<feature_name>_DEFAULT <value>) - set default for both user and developer modes
 # set(<feature_name>_DEVELOPER_DEFAULT <value>) - set default for developer mode
 # set(<feature_name>_USER_DEFAULT <value>) - set default for user mode
+set(ENABLE_CLANG_TIDY_DEFAULT OFF)
+set(ENABLE_CPPCHECK_DEFAULT OFF)
+set(ENABLE_CLANG_TIDY OFF)
+set(ENABLE_CPPCHECK OFF)
+# enable Conan
+set(ENABLE_CONAN_DEFAULT ON)
+
 
 # Initialize project_options variable related to this project
 # This overwrites `project_options` and sets `project_warnings`
@@ -132,19 +139,19 @@ add_subdirectory(configured_files)
 # Adding the src:
 add_subdirectory(src)
 
-# Adding the tests:
-option(ENABLE_TESTING "Enable the tests" ${PROJECT_IS_TOP_LEVEL})
-if(ENABLE_TESTING)
-  enable_testing()
-  message(AUTHOR_WARNING "Building Tests. Be sure to check out test/constexpr_tests.cpp for constexpr testing")
-  add_subdirectory(test)
-endif()
+## Adding the tests:
+#option(ENABLE_TESTING "Enable the tests" ${PROJECT_IS_TOP_LEVEL})
+#if(ENABLE_TESTING)
+#  enable_testing()
+#  message(AUTHOR_WARNING "Building Tests. Be sure to check out test/constexpr_tests.cpp for constexpr testing")
+#  add_subdirectory(test)
+#endif()
 
-option(ENABLE_FUZZING "Enable the fuzz tests" OFF)
-if(ENABLE_FUZZING)
-  message(AUTHOR_WARNING "Building Fuzz Tests, using fuzzing sanitizer https://www.llvm.org/docs/LibFuzzer.html")
-  add_subdirectory(fuzz_test)
-endif()
+#option(ENABLE_FUZZING "Enable the fuzz tests" OFF)
+#if(ENABLE_FUZZING)
+#  message(AUTHOR_WARNING "Building Fuzz Tests, using fuzzing sanitizer https://www.llvm.org/docs/LibFuzzer.html")
+#  add_subdirectory(fuzz_test)
+#endif()
 
 # If MSVC is being used, and ASAN is enabled, we need to set the debugger environment
 # so that it behaves well with MSVC's debugger, and we can run the target from visual studio
